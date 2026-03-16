@@ -32,13 +32,13 @@ const formatRelativeTime = (date: Date) => {
     return `${dateString} at ${timeString}`;
 };
 
-const GALLERY_IMAGES = [
-    "/gallery/snickers_1.jpg",
-    "/gallery/snickers_2.jpg",
-    "/gallery/snickers_3.jpg",
-    "/gallery/snickers_4.jpg",
-    "/gallery/snickers_5.jpg",
-];
+import img1 from "../../public/gallery/snickers_1.jpg";
+import img2 from "../../public/gallery/snickers_2.jpg";
+import img3 from "../../public/gallery/snickers_3.jpg";
+import img4 from "../../public/gallery/snickers_4.jpg";
+import img5 from "../../public/gallery/snickers_5.jpg";
+
+const GALLERY_IMAGES = [img1, img2, img3, img4, img5];
 
 export function SightingHero() {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -77,9 +77,9 @@ export function SightingHero() {
                     className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbars w-full gap-4 px-[10vw] md:px-[30vw] py-4"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {GALLERY_IMAGES.map((src, idx) => (
+                    {GALLERY_IMAGES.map((imgData, idx) => (
                         <motion.div
-                            key={src}
+                            key={`gallery-item-${idx}`}
                             data-index={idx}
                             className="gallery-item relative w-[80vw] h-[80vw] max-w-[400px] max-h-[400px] shrink-0 snap-center rounded-[2rem] bg-surface-dim overflow-hidden shadow-2xl border-4 border-zinc-800"
                             initial={{ scale: 0.9, opacity: 0, x: 20 }}
@@ -92,7 +92,7 @@ export function SightingHero() {
                             }}
                         >
                             <Image
-                                src={src}
+                                src={imgData}
                                 alt={`Snickers Gallery Photo ${idx + 1}`}
                                 fill
                                 sizes="(max-width: 768px) 80vw, 400px"
