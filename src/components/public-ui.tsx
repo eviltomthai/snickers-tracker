@@ -33,11 +33,11 @@ const formatRelativeTime = (date: Date) => {
 };
 
 const GALLERY_IMAGES = [
-    "/snickers/gallery/snickers_1.jpg",
-    "/snickers/gallery/snickers_2.jpg",
-    "/snickers/gallery/snickers_3.jpg",
-    "/snickers/gallery/snickers_4.jpg",
-    "/snickers/gallery/snickers_5.jpg",
+    "/gallery/snickers_1.jpg",
+    "/gallery/snickers_2.jpg",
+    "/gallery/snickers_3.jpg",
+    "/gallery/snickers_4.jpg",
+    "/gallery/snickers_5.jpg",
 ];
 
 export function SightingHero() {
