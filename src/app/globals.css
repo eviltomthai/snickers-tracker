@@ -11,8 +11,8 @@
   /* Very dark blue-gray */
   --color-surface: #181C25;
   --color-surface-dim: #212631;
-  --color-text-main: #F3F4F6;
-  --color-text-muted: #9CA3AF;
+  --color-text-main: #FFFFFF; /* Pure white for higher contrast */
+  --color-text-muted: #D1D5DB; /* Lighter gray for better legibility */
 
   --font-sans: "SF Pro Rounded", "Quicksand", "Nunito", ui-rounded, "system-ui", sans-serif;
 
