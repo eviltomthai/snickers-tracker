@@ -133,7 +133,7 @@ export function SightingHero() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
                 >
-                    Did you spot our favorite neighborhood cat? Log her location to earn her some treats!
+                    Where in the world is Snickers today? Drop a pin to earn her some treats!
                 </motion.p>
             </div>
 
@@ -221,17 +221,17 @@ export function SightingForm() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-1.5">
                         <label htmlFor="location" className="text-sm font-bold text-text-main px-1">
-                            Cross Streets or Address <span className="text-brand-pink">*</span>
+                            Where did you spot her? <span className="text-brand-pink">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 id="location"
                                 type="text"
-                                placeholder="e.g., Elena Cir and Arias"
+                                placeholder="e.g., Napping on the Johnson's porch or corner of Elm St."
                                 required
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                className="w-full h-14 pl-12 pr-4 rounded-2xl bg-zinc-900/50 border-2 border-transparent focus:border-brand-pink focus:bg-zinc-900 focus:outline-none transition-all font-bold text-text-main placeholder:text-text-muted/80 shadow-inner shadow-black/30"
+                                className="w-full h-14 pl-12 pr-4 rounded-2xl bg-zinc-900/50 border-2 border-zinc-700/50 focus:border-brand-pink focus:bg-zinc-900 focus:outline-none transition-all font-bold text-text-main placeholder:text-text-muted/80 shadow-inner shadow-black/30"
                             />
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
                         </div>
@@ -247,7 +247,7 @@ export function SightingForm() {
                             placeholder="Get notified when she gets her treat!"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full h-14 px-4 rounded-2xl bg-zinc-900/50 border-2 border-transparent focus:border-brand-blue focus:bg-zinc-900 focus:outline-none transition-all font-bold text-text-main placeholder:text-text-muted/80 shadow-inner shadow-black/30"
+                            className="w-full h-14 px-4 rounded-2xl bg-zinc-900/50 border-2 border-zinc-700/50 focus:border-brand-blue focus:bg-zinc-900 focus:outline-none transition-all font-bold text-text-main placeholder:text-text-muted/80 shadow-inner shadow-black/30"
                         />
                     </div>
 
@@ -281,7 +281,7 @@ export function SightingForm() {
                                     exit={{ opacity: 0 }}
                                     className="flex items-center gap-2"
                                 >
-                                    {isSubmitting ? "Sending..." : "Log Sighting"}
+                                    {isSubmitting ? "Sending..." : "Drop a Paw Print!"}
                                     {!isSubmitting && <Send className="w-5 h-5 ml-1" />}
                                 </motion.div>
                             )}
@@ -385,7 +385,7 @@ export function SightingsFeed() {
             <div className="mb-6">
                 <h3 className="text-2xl font-extrabold text-brand-pink flex items-center gap-2 px-2">
                     <MapPin className="w-6 h-6" />
-                    Recent Sightings
+                    The Snickers Trail
                 </h3>
                 <p className="text-sm font-medium text-text-muted px-2 mt-1">Logged by nice neighbors like you. Thank you!</p>
             </div>
@@ -395,7 +395,7 @@ export function SightingsFeed() {
                     <SightingCard key={sighting.id} sighting={sighting} index={index} total={totalCount} />
                 ))}
                 {sightings.length === 0 && (
-                    <p className="text-text-muted font-medium text-center py-8">No sightings yet. Be the first!</p>
+                    <p className="text-text-muted font-medium text-center py-8">Snickers is in stealth mode today. Be the first to spot her!</p>
                 )}
                 
                 {hasMore && sightings.length > 0 && (
@@ -473,7 +473,7 @@ function SightingCard({ sighting, index, total }: { sighting: any, index: number
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
                         onClick={() => setIsVideoOpen(false)}
                     >
                         <motion.div
