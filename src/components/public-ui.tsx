@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Search, ChevronRight, Fish, Soup, Send, CheckCircle2 } from "lucide-react";
+import { MapPin, Search, ChevronRight, Fish, Soup, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot, getCountFromServer } from "firebase/firestore";
+import { Filter } from "bad-words";
 
 // Utility for relative time formatting
 const formatRelativeTime = (date: Date) => {
@@ -166,10 +167,28 @@ export function SightingForm() {
     const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null);
         if (!location.trim() || !db) return;
+
+        // Email validation
+        if (email.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.trim())) {
+                setError("Please enter a valid email address.");
+                return;
+            }
+        }
+
+        // Profanity filter
+        const filter = new Filter();
+        if (filter.isProfane(location)) {
+            setError("Please keep it family-friendly! Becca's neighborhood is watching.");
+            return;
+        }
 
         setIsSubmitting(true);
         try {
@@ -219,6 +238,19 @@ export function SightingForm() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <AnimatePresence>
+                        {error && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-xl flex items-center gap-2 text-sm font-medium overflow-hidden"
+                            >
+                                <AlertCircle className="w-5 h-5 shrink-0" />
+                                {error}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                     <div className="space-y-1.5">
                         <label htmlFor="location" className="text-sm font-bold text-text-main px-1">
                             Where did you spot her? <span className="text-brand-pink">*</span>
